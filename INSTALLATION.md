@@ -142,7 +142,7 @@ If you want to convert an existing style to templates:
    yarn create-layer-templates --in-dir=styles --out-dir=templates --base-style-path=styles/main-style.json
    ```
 
-For more details see README.md
+For more details see the [README](README.md)
 
 ## Troubleshooting
 
