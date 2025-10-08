@@ -29,28 +29,25 @@ yarn --version
 #### Install Node.js
 If Node.js is not installed:
 
-**Option 1: Download from official website**
-- Visit [nodejs.org](https://nodejs.org/)
-- Download the LTS version for your operating system
-- Run the installer
+*Option 1: Use a package manager*
 
-**Option 2: Using a package manager**
-
-**macOS (using Homebrew):**
+##### **macOS (using Homebrew):**
 ```bash
 brew install node
 ```
-
-**Ubuntu/Debian:**
+##### **Ubuntu/Debian:**
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
-
-**Windows (using Chocolatey):**
+##### **Windows (using Chocolatey):**
 ```bash
 choco install nodejs
 ```
+*Option 2: Download from official website*
+- Visit [nodejs.org](https://nodejs.org/)
+- Download the LTS version for your operating system
+- Run the installer
 
 #### Install Yarn
 If Yarn is not installed:
