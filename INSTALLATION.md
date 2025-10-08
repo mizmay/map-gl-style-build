@@ -1,6 +1,6 @@
 # Map GL Style Build - Installation Guide
 
-:wave: This guide walks through installing and setting up `map-gl-style-build` in a new or existing project containing one or more [Mapbox GL](https://docs.mapbox.com/mapbox-gl-js/style-spec/)|[Maplibre GL](https://maplibre.org/maplibre-style-spec) stylesheet.
+:wave: This guide walks through installing and setting up `map-gl-style-build` in a new or existing project containing one or more [Mapbox GL](https://docs.mapbox.com/mapbox-gl-js/style-spec/) or [Maplibre GL](https://maplibre.org/maplibre-style-spec) stylesheet.
 
 ## Prerequisites
 
@@ -115,11 +115,17 @@ If you are using Git and these are not already in your .gitignore file, it makes
 
 ### For Editing and Rebuilding Styles
 
-1. Make a change to a style attribute in one of the files under `template/layers`
+#### 1. Make a change to a style attribute 
+
+Find the attribute you want to change in one of the files under `template/layers`.
 
 If you are starting from scratch, see the [README](README.md) for the file directory structure you should have or create.
 
-2. Boot up a local web server so you can preview the results of your changes locally
+If you are creating a new layer, add it to the render-ordered list of layers in `templates/variants`
+
+#### 2. Boot up a local web server 
+
+This is so you can preview the results of your changes locally.
 
 I recommend [Caddy](https://caddyserver.com/docs/install), a web server that automatically handles HTTPS certificates and provides excellent performance for local development. It's particularly useful for map development because it can serve static files and handle CORS properly. Once installed, you can run it with:
 
@@ -131,7 +137,9 @@ or, for CORS support:
 
 Then paste the link into your browser to see a locally rendered version of your project.
 
-3. Make your life easier by adding simple build (and preview) keywords you can type to run these commands
+#### 3. Optimize your workflow
+
+Make your life easier by adding simple build (and preview) keywords you can type to run these commands
 
 Under scripts to your new `package.json` add or modify the `scripts` section below:
 
