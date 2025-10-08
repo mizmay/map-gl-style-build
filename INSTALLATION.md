@@ -1,6 +1,6 @@
 # Map GL Style Build - Installation Guide
 
-This guide walks through installing and setting up `map-gl-style-build` in a new or existing project.
+:wave: This guide walks through installing and setting up `map-gl-style-build` in a new or existing project containing one or more [Mapbox GL](https://docs.mapbox.com/mapbox-gl-js/style-spec/)|[Maplibre GL](https://maplibre.org/maplibre-style-spec) stylesheet.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ Before installing, verify what's already available on your system:
 # Check Node.js version
 node --version
 
-# Check npm version (usually comes with Node.js)
+# Check npm version
 npm --version
 
 # Check Yarn version
@@ -27,7 +27,7 @@ yarn --version
 ### Installing Prerequisites (if needed)
 
 #### Install Node.js
-If Node.js is not installed or you need a newer version:
+If Node.js is not installed:
 
 **Option 1: Download from official website**
 - Visit [nodejs.org](https://nodejs.org/)
@@ -109,24 +109,50 @@ your-project/
 ├── node_modules/        # Installed packages
 └── .yarn/              # Yarn configuration
 ```
+If you are using Git and these are not already in your .gitignore file, it makes sense to add them.
 
 ## Next Steps
 
-### For Template-Based Projects
+### For Editing and Rebuilding Styles
 
-If you're using the tool to build styles from templates:
+1. Make a change to a style attribute in one of the files under `template/layers`
 
-1. **Create template directories:**
-   ```bash
-   mkdir -p templates/styles templates/layers
-   ```
+If you are starting from scratch, see the [README](README.md) for the file directory structure you should have or create.
 
-2. **Add your style templates** to `templates/styles/`
-3. **Add your layer templates** to `templates/layers/`
-4. **Build your styles:**
-   ```bash
-   yarn map-gl-style-build --style-dir=templates/styles --layer-dir=templates/layers --out-dir=build
-   ```
+2. Boot up a local web server so you can preview the results of your changes locally
+
+I recommend [Caddy](https://caddyserver.com/docs/install), a web server that automatically handles HTTPS certificates and provides excellent performance for local development. It's particularly useful for map development because it can serve static files and handle CORS properly. Once installed, you can run it with:
+
+`caddy file-server --listen :8080`
+
+or, for CORS support:
+
+`caddy file-server --listen :8080 --browse --cors`
+
+Then paste the link into your browser to see a locally rendered version of your project.
+
+3. Make your life easier by adding simple build (and preview) keywords you can type to run these commands
+
+Under scripts to your new `package.json` add or modify the `scripts` section below:
+
+```json
+{
+  "packageManager": "yarn@4.9.1",
+  "dependencies": {
+    "map-gl-style-build": "https://github.com/mizmay/map-gl-style-build"
+  },
+  "scripts": {
+    "build": "map-gl-style-build --style-dir=templates/styles --layer-dir=templates/layers --out-dir=build",
+    "build:verbose": "map-gl-style-build --style-dir=templates/styles --layer-dir=templates/layers --out-dir=build -v",
+    "clean": "rm -rf build",
+    "preview": "caddy file-server --root ./build --listen :8080 --browse --cors",
+  }
+}
+```
+
+Double-check and make any changes necessary for your local configuration.
+
+Once you've saved that change, you can type `yarn build` to export your layer changes to a new stylesheet, or `yarn preview` to see your changes locally in the browser.
 
 ### For Converting Existing Styles
 
@@ -170,16 +196,3 @@ For more details see the [README](README.md)
 - **Create templates help:** `yarn create-layer-templates --help`
 - **GitHub repository:** [mizmay/map-gl-style-build](https://github.com/mizmay/map-gl-style-build)
 
-## Example Usage
-
-```bash
-# Build a style with verbose output
-yarn map-gl-style-build --style-dir=templates/styles --layer-dir=templates/layers --out-dir=build -v
-
-# Create layer templates from existing style
-yarn create-layer-templates --in-dir=styles --out-dir=templates --base-style-path=styles/main-style.json
-```
-
----
-
-*This guide was created based on the installation process for map-gl-style-build v0.9.0*
